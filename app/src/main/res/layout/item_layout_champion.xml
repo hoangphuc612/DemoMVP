@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    android:backgroundTint="@color/black"
+    app:cardCornerRadius="@dimen/dp_16"
+    tools:targetApi="lollipop">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageChampion"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@null"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/imageChampion" />
+
+        <ImageView
+            android:id="@+id/imageAttack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:contentDescription="@null"
+            android:src="@drawable/attack"
+            app:layout_constraintBottom_toTopOf="@id/imageArmor"
+            app:layout_constraintEnd_toStartOf="@id/textViewAttack" />
+
+        <TextView
+            android:id="@+id/textViewAttack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textViewArmor"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageArmor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:contentDescription="@null"
+            android:src="@drawable/armor"
+            app:layout_constraintBottom_toTopOf="@id/imageHp"
+            app:layout_constraintEnd_toStartOf="@id/textViewArmor" />
+
+        <TextView
+            android:id="@+id/textViewArmor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:textColor="@color/blue"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textViewHp"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageHp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:contentDescription="@null"
+            android:src="@drawable/heart"
+            app:layout_constraintBottom_toTopOf="@id/textViewName"
+            app:layout_constraintEnd_toStartOf="@id/textViewHp" />
+
+        <TextView
+            android:id="@+id/textViewHp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_20"
+            android:textColor="@color/green"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textViewName"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
