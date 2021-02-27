@@ -5,13 +5,13 @@ import com.example.demomvp.data.source.remote.OnFetchDataJsonListener
 import com.example.demomvp.data.source.repository.ChampionRepository
 import java.lang.Exception
 
-class MainPresenter internal constructor(private val repository: ChampionRepository?) : MainContract.Presenter {
+class MainPresenter internal constructor(
+    private val repository: ChampionRepository?
+) : MainContract.Presenter {
 
     private var view: MainContract.View? = null
 
-    override fun onStart() {
-        getChampions()
-    }
+    override fun onStart() {}
 
     override fun onStop() {}
 
@@ -26,7 +26,7 @@ class MainPresenter internal constructor(private val repository: ChampionReposit
             }
 
             override fun onError(exception: Exception?) {
-                view?.onGetChampionError(exception)
+                view?.onError(exception)
             }
         })
     }

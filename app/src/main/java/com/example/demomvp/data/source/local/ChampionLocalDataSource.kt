@@ -1,14 +1,18 @@
 package com.example.demomvp.data.source.local
 
-import com.example.demomvp.data.source.repository.ChampionDataSource
+import com.example.demomvp.data.source.ChampionDataSource
 
 class ChampionLocalDataSource : ChampionDataSource.Local {
 
-    private object Holder {
-        val INSTANCE = ChampionLocalDataSource()
-    }
-
     companion object {
-        val instance: ChampionLocalDataSource by lazy { Holder.INSTANCE }
+        @Volatile
+        private var mInstance: ChampionLocalDataSource? = null
+
+        fun getLocal(): ChampionLocalDataSource =
+            mInstance ?: synchronized(this) {
+                val newInstance =
+                    mInstance ?: ChampionLocalDataSource().also { mInstance = it }
+                newInstance
+            }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demomvp.data.source.repository
+package com.example.demomvp.data.source
 
 import com.example.demomvp.data.model.Champion
 import com.example.demomvp.data.source.remote.OnFetchDataJsonListener

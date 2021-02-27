@@ -10,13 +10,13 @@ interface MainContract {
      */
     interface View {
         fun onGetChampionSuccess(champions: MutableList<Champion>)
-        fun onGetChampionError(exception: Exception?)
+        fun onError(exception: Exception?)
     }
 
     /**
      * Presenter
      */
-    interface Presenter: BasePresenter<View> {
+    interface Presenter : BasePresenter<View> {
         fun getChampions()
     }
 }

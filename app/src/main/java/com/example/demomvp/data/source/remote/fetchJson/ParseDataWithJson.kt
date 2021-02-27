@@ -1,6 +1,7 @@
 package com.example.demomvp.data.source.remote.fetchJson
 
 import com.example.demomvp.data.model.ChampionEntry
+import com.example.demomvp.utils.LoadImageBitmap
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -13,11 +14,13 @@ class ParseDataWithJson {
     fun getJsonFromUrl(urlString: String?): String? {
         val url = URL(urlString)
         val httpURLConnection = url.openConnection() as HttpURLConnection
-        httpURLConnection.connectTimeout = TIME_OUT
-        httpURLConnection.readTimeout = TIME_OUT
-        httpURLConnection.requestMethod = METHOD_GET
-        httpURLConnection.doOutput = true
-        httpURLConnection.connect()
+        httpURLConnection.apply {
+            connectTimeout = TIME_OUT
+            readTimeout = TIME_OUT
+            requestMethod = METHOD_GET
+            doOutput = true
+            connect()
+        }
 
         val bufferedReader = BufferedReader(InputStreamReader(url.openStream()))
         val stringBuilder = StringBuilder()
@@ -37,7 +40,7 @@ class ParseDataWithJson {
             jsonObjectData?.keys()?.forEach {
                 val jsonObjects = jsonObjectData.getJSONObject(it)
                 val item = ParseDataWithJson().parseJsonToObject(jsonObjects, keyEntity)
-                if (data.size.equals(20)) return data
+                if (data.size.equals(MAX_LENGTH)) return data
                 item?.let { data.add(it) }
             }
         } catch (e: JSONException) {
@@ -62,6 +65,7 @@ class ParseDataWithJson {
 
     companion object {
         private const val TIME_OUT = 15000
-        private val METHOD_GET: String? = "GET"
+        private const val METHOD_GET = "GET"
+        private const val MAX_LENGTH = 20
     }
 }

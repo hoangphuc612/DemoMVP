@@ -7,15 +7,18 @@ import org.json.JSONObject
 
 class ParseJson {
 
-    fun championParseJson(jsonObject: JSONObject): Champion {
-        val name = jsonObject.getString(ChampionEntry.NAME)
-        val imageObject = jsonObject.getJSONObject(ChampionEntry.URL_IMAGE)
-        val image = imageObject.getString(ChampionEntry.FULL_IMAGE)
-        val stats = jsonObject.getJSONObject(ChampionEntry.STATS)
-        val attack = stats.getInt(ChampionEntry.ATTACK)
-        val armor = stats.getInt(ChampionEntry.ARMOR)
-        val hp = stats.getInt(ChampionEntry.HP)
-        val convertImage = Constant.BASE_URL_IMAGE + image.replace(Constant.PNG_IMAGE, Constant.CONVERT_IMAGE)
-        return Champion(name, convertImage, attack, hp, armor)
-    }
+    fun championParseJson(jsonObject: JSONObject): Champion =
+        jsonObject.run {
+            val imageObject = getJSONObject(ChampionEntry.URL_IMAGE)
+            val image = imageObject.getString(ChampionEntry.FULL_IMAGE)
+            val stats = getJSONObject(ChampionEntry.STATS)
+            Champion(
+                getString(ChampionEntry.NAME),
+                Constant.BASE_URL_IMAGE +
+                    image.replace(Constant.PNG_IMAGE, Constant.CONVERT_IMAGE),
+                stats.getInt(ChampionEntry.ATTACK),
+                stats.getInt(ChampionEntry.HP),
+                stats.getInt(ChampionEntry.ARMOR)
+            )
+        }
 }
