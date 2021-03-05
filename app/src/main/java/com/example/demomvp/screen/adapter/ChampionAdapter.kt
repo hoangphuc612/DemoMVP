@@ -2,6 +2,7 @@ package com.example.demomvp.screen.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demomvp.R
 import com.example.demomvp.data.model.Champion
@@ -22,12 +23,9 @@ class ChampionAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemChampionViewHolder =
         ItemChampionViewHolder(
-            LayoutInflater.from(parent.context)
-                          .inflate(R.layout.item_layout_champion,parent,false),
+            LayoutInflater.from(parent.context).inflate(R.layout.item_layout_champion,parent,false),
             onItemClickListener
         )
-
-
 
     override fun getItemCount() = champions.size
 

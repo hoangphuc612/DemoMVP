@@ -8,6 +8,7 @@ import com.example.demomvp.R
 import com.example.demomvp.data.model.Champion
 import com.example.demomvp.data.source.local.ChampionLocalDataSource
 import com.example.demomvp.data.source.remote.ChampionRemoteDataSource
+import com.example.demomvp.data.source.remote.fetchJson.ParseDataWithJson
 import com.example.demomvp.data.source.repository.ChampionRepository
 import com.example.demomvp.screen.adapter.ChampionAdapter
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         initView()
         initData()
+        
     }
 
     private fun initView() {
