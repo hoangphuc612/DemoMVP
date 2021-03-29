@@ -7,10 +7,10 @@ import com.example.demomvp.data.source.remote.OnFetchDataJsonListener
 import org.json.JSONObject
 import java.lang.Exception
 
-class GetJsonFromUrl<T> constructor (
-        private val listener: OnFetchDataJsonListener<T>,
-        private val keyEntity: String
-) : AsyncTask<String?,Void?,String?>() {
+class GetJsonFromUrl<T> constructor(
+    private val listener: OnFetchDataJsonListener<T>,
+    private val keyEntity: String
+) : AsyncTask<String?, Void?, String?>() {
 
     private var exception: Exception? = null
 

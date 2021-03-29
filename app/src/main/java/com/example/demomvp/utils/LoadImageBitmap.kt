@@ -9,21 +9,25 @@ import android.widget.ImageView
 import java.net.HttpURLConnection
 import java.net.URL
 
-class LoadImageBitmap(private val imgImage: ImageView) : AsyncTask<String?,Void?,Bitmap?>() {
+class LoadImageBitmap(
+    private val imageChampion: ImageView
+) : AsyncTask<String?, Void?, Bitmap?>() {
 
     override fun doInBackground(vararg params: String?): Bitmap? {
         val url = URL(params[0].toString())
         val connection = url.openConnection() as HttpURLConnection
-        connection.connectTimeout = TIME_OUT
-        connection.readTimeout = TIME_OUT
-        connection.requestMethod = METHOD_GET
-        connection.doOutput = true
-        connection.connect()
+        connection.apply {
+            connectTimeout = TIME_OUT
+            readTimeout = TIME_OUT
+            requestMethod = METHOD_GET
+            doOutput = true
+            connect()
+        }
         return BitmapFactory.decodeStream(url.openStream())
     }
 
     override fun onPostExecute(result: Bitmap?) {
-        imgImage.setImageBitmap(result)
+        imageChampion.setImageBitmap(result)
     }
 
     companion object {

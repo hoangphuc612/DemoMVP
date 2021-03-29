@@ -2,18 +2,29 @@ package com.example.demomvp.screen
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.demomvp.R
 import com.example.demomvp.data.model.Champion
+import com.example.demomvp.data.source.local.ChampionLocalDataSource
+import com.example.demomvp.data.source.remote.ChampionRemoteDataSource
 import com.example.demomvp.data.source.repository.ChampionRepository
-import com.example.demomvp.screen.adapter.MainAdapter
-import com.example.demomvp.utils.OnItemRecyclerViewClickListener
+import com.example.demomvp.screen.adapter.ChampionAdapter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Exception
 
-class MainActivity : AppCompatActivity(), MainContract.View, OnItemRecyclerViewClickListener<Champion> {
+class MainActivity : AppCompatActivity(), MainContract.View {
 
-    private val adapter: MainAdapter by lazy { MainAdapter() }
+    private val championAdapter by lazy {
+        ChampionAdapter {
+            onItemClickListener(it)
+        }
+    }
+
+    private fun onItemClickListener(champion: Champion) {
+        Toast.makeText(this, champion.name, Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,27 +34,29 @@ class MainActivity : AppCompatActivity(), MainContract.View, OnItemRecyclerViewC
     }
 
     private fun initView() {
-        recyclerViewChampion.setHasFixedSize(true)
-        recyclerViewChampion.adapter = adapter
-        adapter.registerItemRecyclerViewClickListener(this)
+        recyclerViewChampion.apply {
+            adapter = championAdapter
+            setHasFixedSize(true)
+        }
     }
 
     private fun initData() {
-        MainPresenter(ChampionRepository.instance).apply {
+        MainPresenter(
+            ChampionRepository.getRepository(
+                ChampionRemoteDataSource.getRemote(),
+                ChampionLocalDataSource.getLocal()
+            )
+        ).apply {
             setView(this@MainActivity)
-            onStart()
+            getChampions()
         }
     }
 
     override fun onGetChampionSuccess(champions: MutableList<Champion>) {
-        adapter.updateData(champions)
+        championAdapter.updateData(champions)
     }
 
-    override fun onGetChampionError(exception: Exception?) {
+    override fun onError(exception: Exception?) {
         Toast.makeText(this, exception?.message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onItemClickListener(item: Champion?) {
-        Toast.makeText(this, item?.name, Toast.LENGTH_SHORT).show()
     }
 }
